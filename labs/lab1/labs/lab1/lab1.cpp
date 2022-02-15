@@ -1,30 +1,56 @@
 #include <iostream>
-#include "Algorithms.h"
+#include <chrono>
 #include <vector>
 
+#include <ctime>
+#include <cstdlib>
+
+#include "Algorithms.h"
+
+#define SIZE 10000
+
+void FillArr(int* arr, const size_t ciSize)
+{
+    for (int i = 0; i < ciSize; i++)
+    {
+        arr[i] = (rand() % 100) + 1;
+    }
+}
+
+void ShowStats(std::string sSortName, std::chrono::microseconds time)
+{
+    std::cout << sSortName << std::endl;
+    std::cout << "size of array = " << SIZE << std::endl;
+    std::cout << "DURATION = " << time.count() << " microseconds\n";
+}
 
 int main()
 {
-    const int ciSize = 10;
+    srand(time(0));
 
-    int arr[ciSize] = { 4, 5, 2, 7, -12, 4, 98, 546, -90, 3 };
+    //Arrays for testing
+    std::vector<int> vec1, vec2;
+    vec1.resize(SIZE);
+    FillArr(vec1.data(), vec1.size());
+    vec2 = vec1;
 
-   
-    std::cout << "Before sort:\n";
-    for (const auto& val : arr)
-    {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
 
-    ShellSort<int>(arr, ciSize);
+    //SelectionSort
+    auto start = std::chrono::high_resolution_clock::now();
+    Lab1Algs::SelectionSort(vec1.data(), SIZE);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    ShowStats("SelectionSort", duration);
 
-    std::cout << "After sort:\n";
-    for (const auto& val : arr)
-    {
-        std::cout << val << " ";
-    }
-    
+    std::cout << "\n===================================================================\n\n";
+
+    //ShellSort
+    start = std::chrono::high_resolution_clock::now();
+    Lab1Algs::ShellSort(vec1.data(), SIZE);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    ShowStats("ShellSort", duration);
+
 
 
 }
