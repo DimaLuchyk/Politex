@@ -9,6 +9,7 @@ int main()
 
     int arr[ciSize] = { 4, 5, 2, 7, -12, 4, 98, 546, -90, 3 };
 
+   
     std::cout << "Before sort:\n";
     for (const auto& val : arr)
     {
@@ -16,11 +17,14 @@ int main()
     }
     std::cout << std::endl;
 
-    SelectionSort<int>(arr, ciSize);
+    ShellSort<int>(arr, ciSize);
 
     std::cout << "After sort:\n";
     for (const auto& val : arr)
     {
         std::cout << val << " ";
     }
+    
+
+
 }
