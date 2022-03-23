@@ -7,7 +7,16 @@
 
 #include "Algorithms.h"
 
-#define SIZE 10000
+#define SIZE 100000
+
+void ShowVector(const std::vector<int>& cVec)
+{
+	for(const auto& el : cVec)
+	{
+		std::cout << el << " ";
+	}
+	std::cout << std::endl;
+}
 
 void FillArr(int* arr, const size_t ciSize)
 {
@@ -36,19 +45,34 @@ int main()
 
 
     //SelectionSort
+    //std::cout << "vec1 before sorting: \n";
+    //ShowVector(vec1);
+
     auto start = std::chrono::high_resolution_clock::now();
     Lab1Algs::SelectionSort(vec1.data(), SIZE);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    //std::cout << "vec1 after sorting: \n";
+    //ShowVector(vec1);
+
     ShowStats("SelectionSort", duration);
 
     std::cout << "\n===================================================================\n\n";
 
     //ShellSort
+    
+    //std::cout << "vec2 before sorting:\n";
+    //ShowVector(vec2);
+
     start = std::chrono::high_resolution_clock::now();
-    Lab1Algs::ShellSort(vec1.data(), SIZE);
+    Lab1Algs::ShellSort(vec2.data(), SIZE);
     end = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    //std::cout << "vec2 after sorting: \n";
+    //ShowVector(vec2);
+    
     ShowStats("ShellSort", duration);
 
 
